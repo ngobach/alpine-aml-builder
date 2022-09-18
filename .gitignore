@@ -1,0 +1,10 @@
+/alpine_root
+/.tmp
+/*.tar.xz
+/*.tar.gz
+/kernelrelease
+/*.dtb
+/uImage*
+/uInitrd*
+/modloop-*
+/src/*-orig
