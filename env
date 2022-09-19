@@ -1,5 +1,7 @@
 export ARCH=arm
-#export CROSS_COMPILE=/home/bachnx/Projects/amls805/gcc-arm-11.2-2022.02-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
-export CROSS_COMPILE=/home/bachnx/Projects/amls805/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
+export CROSS_COMPILE=/home/bachnx/Projects/amls805/gcc-arm-11.2-2022.02-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
+#export CROSS_COMPILE=/home/bachnx/Projects/amls805/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
 
-alias meson="$(readlink -f "${BASH_SOURCE[0]}/cmd")"
+WORK_DIR="$(dirname $(readlink -f "$0"))"
+
+alias meson="$WORK_DIR/cmd"

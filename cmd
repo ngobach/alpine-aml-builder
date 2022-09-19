@@ -12,6 +12,7 @@ meson_cp() {
     KERNEL_RELEASE="$(make kernelrelease)"
     echo "KERNEL_RELEASE=$KERNEL_RELEASE"
     echo "$KERNEL_RELEASE" > $DEST/kernelrelease
+    echo "File kernelrelease created."
 
     for FILE in \
         linux-*-arm.tar.* \
@@ -21,11 +22,10 @@ meson_cp() {
     ; do
         if [[ -f $FILE ]]; then
             cp $FILE $DEST
+            echo "File $FILE copied."
         fi
     done
 }
-
-echo $DEST
 
 case $1 in
 cp)

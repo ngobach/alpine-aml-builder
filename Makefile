@@ -18,7 +18,7 @@ uInitrd: src/initramfs-orig
 	gunzip -c < $^ | (cd $(TMP_INITRAMFSROOT) && cpio -idv)
 	rm -rf $(TMP_INITRAMFSROOT)/lib/modules && mkdir -p $(TMP_INITRAMFSROOT)/lib/modules
 	@if [ "$(INITRD_MODS)" = y ]; then tar -xvf "$(LINUX_PKG)" -C $(TMP_INITRAMFSROOT) lib/modules; fi
-	@if [ -d src/overlays ]; then cp -r src/overlays/. $(TMP_INITRAMFSROOT); fi
+	# @if [ -d src/overlays ]; then cp -r src/overlays/. $(TMP_INITRAMFSROOT); fi
 	(cd $(TMP_INITRAMFSROOT) && find . | cpio -H newc -o) > $(TMP_INITRAMFS)
 	mkimage -A arm -T ramdisk -C none -d $(TMP_INITRAMFS) $@
 	rm -rf $(TMP_INITRAMFSROOT) $(TMP_INITRAMFS)
@@ -35,7 +35,7 @@ uInitrd: src/initramfs-orig
 .PHONY: modloop-custom
 modloop-custom: src/modloop-orig
 	@[ -f "$(LINUX_PKG)" ] || (echo "Invalid LINUX_PKG: ($(LINUX_PKG))" && false)
-	rm -rf $(TMP_MODLOOP)
+	rm -rf $(TMP_MODLOOP) $@
 	unsquashfs -d $(TMP_MODLOOP) $^
 	rm -rf $(TMP_MODLOOP)/modules/*-lts # Warn: dirty
 	tar -xvf "$(LINUX_PKG)" -C $(TMP_MODLOOP) lib/modules --strip-components=1
